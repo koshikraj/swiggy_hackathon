@@ -8,6 +8,8 @@ WEBSITE_BASE_PORT = 80
 # from project.component import *
 
 apps = falcon.API()
+apps.add_route("/get-distance/", GetData())
+apps.add_route("/post-distance/", PostData())
 
 if __name__ == "__main__":
     def static(req, res, static_dir='static', index_file='index.html'):
@@ -21,11 +23,6 @@ if __name__ == "__main__":
         else:
             res.status = falcon.HTTP_404
 
-
-
-
-    apps.add_route("/get-distance/", GetData())
-    apps.add_route("/post-distance/", PostData())
     apps.add_sink(static)
 
     host = WEBSITE_BASE_URL
