@@ -1,4 +1,4 @@
-from api.neorpc.Client import RPCClient
+from neorpc.Client import RPCClient
 import binascii
 import base64
 import json
