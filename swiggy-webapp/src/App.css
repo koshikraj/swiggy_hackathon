@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+.grab {cursor: -webkit-grab; cursor: grab;}
+
+.vl {
+    border-left: 0.2px solid #A9A9A9;
+    height: 500px;
+    margin-left: 160px;
+}
+.avatar: {
+    margin: 10,
+  },
+
+.App-title {
+  font-size: 1.5em;
+}
+.ListItem {
+  font-weight: 420;
+  padding-bottom: 10px;
+  padding-left: 80px;
+  cursor: -webkit-grab; cursor: grab;
+}
+.right-align {
+    float: right;
+    margin-left: 100px;
+}
+.main {
+    top: 1000;
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 18px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+    position: fixed;
+}
+
+.App-intro {
+  font-size: large;
+}
+.sidenav {
+    height: 100%;
+    width: 160px;
+   
+    
+    top: 100;
+    left: 100;
+    /*background-color: #111;*/
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
