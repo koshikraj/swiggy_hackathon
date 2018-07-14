@@ -10,6 +10,7 @@ WEBSITE_BASE_PORT = 80
 apps = falcon.API()
 apps.add_route("/get-distance/", GetData())
 apps.add_route("/post-distance/", PostData())
+apps.add_route("/api/category/{restaurant_id}", Category())
 
 if __name__ == "__main__":
     def static(req, res, static_dir='static', index_file='index.html'):

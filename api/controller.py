@@ -38,3 +38,31 @@ class PostData:
                                'message': 'success'
                               })
 
+
+class Category:
+    def on_get(self, req, res, restaurant_id):
+        print(restaurant_id)
+        res.status = falcon.HTTP_200
+        res.body = json.dumps({
+            "data": {
+                "categories": [
+                    {
+                        "category_name": "Dal",
+                        "category_id": "1",
+                        "category_items": [
+                            {
+                                "Dal Fry": {
+                                    "item_id": 1,
+                                    "price": 137,
+                                    "veg": True,
+                                    "ingredient_id": 123
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "status": True
+        })
+
+
