@@ -42,9 +42,7 @@ class PostData:
 class Category:
     def on_get(self, req, res, restaurant_id):
         print(restaurant_id)
-        res.status = falcon.HTTP_200
-        res.body = json.dumps({
-            "data": {
+        data =  {
                 "categories": [{
                     "category_name": "Dal",
                     "category_id": "1",
@@ -56,8 +54,12 @@ class Category:
                         "ingredient_id": 123
                     }]
                 }]
-            },
-            "status": True
-        })
+            }
+
+        res.status = falcon.HTTP_200
+        res.body = json.dumps({'status': True,
+                              'data': data,
+                               'message': 'success'
+                              })
 
 
