@@ -18,7 +18,7 @@ def invoke_contract(assets_id='asd'):
 def get_owner_data(assets_id='asd'):
     data = dict(invoke_contract(assets_id))
     value = data['stack'][0]['value']
-    owner_data = json.loads(base64.b64decode(binascii.a2b_hex(value)))
+    owner_data = json.loads(base64.b64decode(binascii.a2b_hex(value)).decode())
     return owner_data
 
 
