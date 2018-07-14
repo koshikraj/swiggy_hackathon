@@ -7,10 +7,13 @@ WEBSITE_BASE_URL = '0.0.0.0'
 WEBSITE_BASE_PORT = 80
 # from project.component import *
 
+
 apps = falcon.API()
 apps.add_route("/get-distance/", GetData())
 apps.add_route("/post-distance/", PostData())
 apps.add_route("/api/category/{restaurant_id}", Category())
+apps.add_route("/api/get_hash/{block_id}", GetHash())
+apps.add_route("/api/get_owner_data/{assets_id}", OwnerData())
 
 if __name__ == "__main__":
     def static(req, res, static_dir='static', index_file='index.html'):
