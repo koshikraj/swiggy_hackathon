@@ -45,22 +45,17 @@ class Category:
         res.status = falcon.HTTP_200
         res.body = json.dumps({
             "data": {
-                "categories": [
-                    {
-                        "category_name": "Dal",
-                        "category_id": "1",
-                        "category_items": [
-                            {
-                                "Dal Fry": {
-                                    "item_id": 1,
-                                    "price": 137,
-                                    "veg": True,
-                                    "ingredient_id": 123
-                                }
-                            }
-                        ]
-                    }
-                ]
+                "categories": [{
+                    "category_name": "Dal",
+                    "category_id": "1",
+                    "category_items": [{
+                        "item_name": "Dal Fry",
+                        "item_id": 1,
+                        "price": 137,
+                        "is_veg": True,
+                        "ingredient_id": 123
+                    }]
+                }]
             },
             "status": True
         })
