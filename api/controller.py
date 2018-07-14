@@ -51,7 +51,7 @@ class Category:
                         "item_id": 1,
                         "price": 137,
                         "is_veg": True,
-                        "ingredient_id": 123
+                        "ingredient_id": [123]
                     }]
                 }]
             }
