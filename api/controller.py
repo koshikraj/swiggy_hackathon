@@ -43,7 +43,7 @@ class PostData:
 
 class Category:
     def on_get(self, req, res, restaurant_id):
-        print(restaurant_id)
+        # print(restaurant_id)
         data = {
             "categories": [{
                 "category_name": "Dal",
@@ -67,7 +67,7 @@ class Category:
 
 class GetHash:
     def on_get(self, req, res, block_id):
-        print("Block ID ", block_id)
+        # print("Block ID ", block_id)
 
         res.status = falcon.HTTP_200
         # print(get_hash_of_block(block_id))
@@ -80,7 +80,7 @@ class GetHash:
 class OwnerData:
     def on_get(self, req, res, assets_id):
         try:
-            print("Block ID ", assets_id)
+            # print("Block ID ", assets_id)
             res.status = falcon.HTTP_200
             res.body = json.dumps({'status': True,
                                    'data': get_owner_data(assets_id),
