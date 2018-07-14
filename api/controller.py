@@ -87,10 +87,10 @@ class OwnerData:
                                    'message': 'success'
                                    })
 
-        except:
+        except Exception as e:
             res.status = falcon.HTTP_400
             res.body = json.dumps({'status': False,
                                      'data': {},
-                                     'message': 'Invalid Assests ID'
+                                     'message': str(e)
                                      })
 
