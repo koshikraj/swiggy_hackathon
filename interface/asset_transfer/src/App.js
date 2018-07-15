@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Neon, {rpc} from '@cityofzion/neon-js'
-// import {encode, decode} from 'base-64';
+import {encode, decode} from 'base-64';
 // base58 = require("ba se-58");
-import {encode, decode} from 'base-58';
+// import {encode, decode} from 'base-58';
 import hexEncoding from 'crypto-js/enc-hex';
 import SHA256 from 'crypto-js/sha256';
 
@@ -27,6 +27,8 @@ function reverseHex(hex) {
     }
     return out
 }
+
+
 
 function scripthash_to_address(scriptHash)
 {
@@ -58,7 +60,57 @@ String.prototype.hexDecode = function(){
     return back;
 };
 
-console.log('1234'.hexEncode());
+function transferAsset(assetId, fromAddress, toAddress) {
+    const config = {
+        scriptHash: '73a943ddf76e7d6d29847a19ab0e9ea7e83d8e90',
+        operation: 'query',
+        args: [assetId.hexEncode()
+        ]
+    };
+
+    rpc.Query.invokeScript(Neon.create.script(config)).execute('http://139.59.65.33:30333').then((res) => {
+        console.log(res.result.stack[0].value.hexDecode())});
+
+}
+
+function registerAsset() {
+
+    const sourceAddress = 'AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y';
+    const assetId = Math.floor((Math.random() * 1000000)).toString();
+
+    // const config = {
+    //     scriptHash: 'f5f52e1afedf383940e875db37cb5641516d4692',
+    //     operation: 'register',
+    //     args: [assetId.hexEncode(), sourceAddress.hexEncode(), "koshik".hexEncode()]
+    // };
+
+    // rpc.Query.invokeScript(Neon.create.script(config)).execute('http://139.59.65.33:30333').then((res) => {
+    //     console.log(res.result.stack[0])});
+
+    // only param generation
+
+    // mush01
+    // pota01
+    // dal01
+    // appl01
+    // bana01
+
+
+    console.log([assetId, sourceAddress, encode(JSON.stringify({"type": "mush01",
+        "timestamp": [1531608975],
+        "owners": [sourceAddress]
+    }))])
+
+
+
+
+
+}
+
+transferAsset('70434')
+// registerAsset('koshika')
+
+
 
 class App extends Component {
 
@@ -72,7 +124,7 @@ class App extends Component {
         };
 
         const config = {
-            net: 'http://localhost:4000',
+            net: 'TestNet',
             script: Neon.create.script({
                 scriptHash: '60a7ed582c6885addf1f9bec7e413d01abe54f1a',
                 operation: 'query',
@@ -85,14 +137,12 @@ class App extends Component {
             gas: 1
         }
 
-        Neon.doInvoke(config).then(res => {
-            console.log(res)
-        })
+        // Neon.doInvoke(config).then(res => {
+        //     console.log(res)
+        // })
 
 
-        // const Script = Neon.create.script(config);
-        //
-        // rpc.Query.invokeScript(Script).execute('http://139.59.65.33:30333').then((res) => {
+        // rpc.Query.invokeScript(config.script).execute('http://139.59.65.33:30333').then((res) => {
         //
         //     this.setState({owner: scripthash_to_address(res.result.stack[0].value)});
         // });

@@ -91,6 +91,7 @@ def register_asset(asset_id, owner, info):
     msg = concat("RegisterAsset: ", asset_id)
     Notify(msg)
 
+    # removing witness check for hackathon
     if not CheckWitness(owner):
         Notify("Owner argument is not the same as the sender")
         return False
@@ -116,6 +117,7 @@ def transfer_asset(asset_id, to_address, info, asset_list):
         Notify("Asset is not yet registered")
         return False
 
+    # removing witness check for hackathon
     if not CheckWitness(owner):
         Notify("Sender is not the owner, cannot transfer")
         return False
