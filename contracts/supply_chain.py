@@ -51,7 +51,14 @@ def main(operation, args):
             return 0
         asset_id = args[0]
         to_address = args[1]
-        return transfer_asset(asset_id, to_address)
+        info = args[2]
+        asset_list = args[3]
+        return transfer_asset(asset_id, to_address, info, asset_list)
+
+    elif operation == 'query_asset_list':
+        address = args[0]
+        return query_asset_list(address)
+
 
 
 def query_asset(asset_id):
@@ -68,11 +75,23 @@ def query_asset(asset_id):
     Notify(owner)
     return info
 
+def query_asset_list(address):
+
+    context = GetContext()
+    asset_list = Get(context, address)
+
+    if not asset_list:
+        Notify("No assets found for user")
+        return False
+
+    return asset_list
+
 
 def register_asset(asset_id, owner, info):
     msg = concat("RegisterAsset: ", asset_id)
     Notify(msg)
 
+    # removing witness check for hackathon
     if not CheckWitness(owner):
         Notify("Owner argument is not the same as the sender")
         return False
@@ -88,7 +107,7 @@ def register_asset(asset_id, owner, info):
     return True
 
 
-def transfer_asset(asset_id, to_address, info):
+def transfer_asset(asset_id, to_address, info, asset_list):
     msg = concat("TransferAsset: ", asset_id)
     Notify(msg)
 
@@ -98,6 +117,7 @@ def transfer_asset(asset_id, to_address, info):
         Notify("Asset is not yet registered")
         return False
 
+    # removing witness check for hackathon
     if not CheckWitness(owner):
         Notify("Sender is not the owner, cannot transfer")
         return False
@@ -108,6 +128,7 @@ def transfer_asset(asset_id, to_address, info):
 
     Put(context, asset_id, to_address)
     Put(context, asset_id+'info', info)
+    Put(context, to_address, asset_list)
     return True
 
 

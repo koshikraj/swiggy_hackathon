@@ -4,15 +4,19 @@ import base64
 import json
 
 client = RPCClient()
-CONTRACT_ID = '0xd2034b4fa9ed43008ea709f53f3086dbe9b6ca8c'
+CONTRACT_ID = '0xe9bf8617ee1e4a3ff9177eb6ebe2d9e790fc590a'
 
 
 def get_hash_of_block(block_id=1):
     return client.get_block_hash(block_id)
 
 
-def invoke_contract(assets_id='asd'):
+def invoke_contract(assets_id):
     return client.invoke_contract_fn(CONTRACT_ID, "query", [{'type': 7, 'value': assets_id}])
+
+def invoke_contract_query_asset(owner):
+    return client.invoke_contract_fn(CONTRACT_ID, "query_asset_list", [{'type': 7, 'value': owner}])
+
 
 
 def get_owner_data(assets_id='asd'):
