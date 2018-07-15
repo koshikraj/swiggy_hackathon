@@ -10,6 +10,10 @@ import Button from '@material-ui/core/Button';
 import '../App.css';
 import source from '../source.png';
 import market from '../market.png';
+import tick from '../tick.png';
+import rest from '../rest.png';
+import add from '../add.png';
+import loader from '../loader.gif';
 import Avatar from '@material-ui/core/Avatar';
 import {Timeline, TimelineEvent} from 'react-event-timeline'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -17,8 +21,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { withStyles } from '@material-ui/core/styles';
+import veg from '../veg.png';
+import nonveg from '../nonveg.png';
 
-const IconList = {0:source, 1:market}
+const IconList = {0:source, 1:market, 2:rest}
 
 const styles = theme => ({
   button: {
@@ -52,7 +58,7 @@ class Modal extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false ,active_ingredient:null});
   };
 
   getIngredients(callback, data){
@@ -126,11 +132,13 @@ class Modal extends Component {
 
 
   render() {
-  	// alert(JSON.stringify(this.state))
   	const classes  = this.props;
     return (
       <div>
-      <Avatar onClick={this.handleClickOpen} alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnFwLX-S70L4CGd5tUFGZCa_rDFEnUY8_l7LK3Ykl4SETp3YtE" className="avatar" />
+      <div style={{display: 'flex',flex_wrap: 'nowrap', right:600, position: 'fixed'}}>
+      {('ingredients' in this.props.ItemData)?<img onClick={this.handleClickOpen} style={{width:25,height:25, paddingRight:30}} src={tick}/>:null}
+      <img style={{width:73,height:30}} src={add}/>
+      </div>
       <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -140,34 +148,37 @@ class Modal extends Component {
         <DialogContent style={{paddingLeft:100}}>
         	{(this.state.ingredients)?
         		<div>
-        		<div>{this.props.ItemData.item_name}</div>
-        	        	<div style={{paddingTop:30}}>
-        	        	<FormControl className={classes.formControl}>
-				          <InputLabel style={{fontSize:20}} htmlFor="demo-controlled-open-select">Ingredients</InputLabel>
-				          <Select
-				            open={this.state.openselect}
-				            onClose={this.handleSelectClose}
-				            onOpen={this.handleSelectOpen}
-				            value={this.state.active_ingredient}
-				            onChange={this.handleSelectChange}
-				            inputProps={{
-				              name: 'active_ingredient',
-				              id: 'demo-controlled-open-select',
-				            }}
-				          >
-				            {this.props.ItemData.ingredients.map(name => (
-							      <MenuItem
-							        value={name.ingredient_id}
-							      >
-							        {name.ingredient_name}
-							      </MenuItem>
-							    ))}
-				          </Select>
-				        </FormControl>
-        	        	</div>
+        		<div style={{display: 'flex',flex_wrap: 'nowrap'}}>
+			      <div>{(this.props.ItemData.is_veg)?<img style={{width:15, paddingRight:8}} src={veg}/>:<img style={{width:15, paddingRight:8}} src={nonveg}/>}</div>
+			      <div style={{fontWeight:'bold'}}>{this.props.ItemData.item_name}</div>
+			    </div>
+        	        	{(('ingredients' in this.props.ItemData))?<div style={{paddingTop:30}}>
+        	        	        	        	<FormControl className={classes.formControl}>
+        	        					          <InputLabel style={{fontSize:20}} htmlFor="demo-controlled-open-select">Ingredients</InputLabel>
+        	        					          <Select
+        	        					            open={this.state.openselect}
+        	        					            onClose={this.handleSelectClose}
+        	        					            onOpen={this.handleSelectOpen}
+        	        					            value={this.state.active_ingredient}
+        	        					            onChange={this.handleSelectChange}
+        	        					            inputProps={{
+        	        					              name: 'active_ingredient',
+        	        					              id: 'demo-controlled-open-select',
+        	        					            }}
+        	        					          >
+        	        					            {this.props.ItemData.ingredients.map(name => (
+        	        								      <MenuItem
+        	        								        value={name.ingredient_id}
+        	        								      >
+        	        								        {name.ingredient_name}
+        	        								      </MenuItem>
+        	        								    ))}
+        	        					          </Select>
+        	        					        </FormControl>
+        	        	        	        	</div>:null}
         	        	<div style={{paddingTop:20}}>{this.RenderTimeStamp()}</div>
         	        	</div>
-        	        	:'LoAdInG'}
+        	        	:<img src={loader} />}
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary" autoFocus>

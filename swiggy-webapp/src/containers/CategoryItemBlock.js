@@ -25,8 +25,8 @@ class CategoryItemBlock extends Component {
   render() {
     return (
       <div >
-      <div style={{fontWeight: 'bold', fontSize: 20, paddingBottom: 2}}>{this.props.ItemsData.category_name}</div>
-      <div style={{fontSize:12, color:'grey', textDecorationLine:"underline", paddingBottom: 12}} >{this.props.ItemsData.category_items.length}{' ITEM/S'}</div>
+      <div style={{fontWeight: 'bold', fontSize: 20, paddingBottom: 6}}>{this.props.ItemsData.category_name}</div>
+      <div style={{fontSize:14, color:'grey', textDecorationLine:"underline", paddingBottom: 20}} >{this.props.ItemsData.category_items.length}{' ITEM/S'}</div>
       <div>{this.RenderItems(this.props.ItemsData.category_items)}</div>
       </div>
     );
